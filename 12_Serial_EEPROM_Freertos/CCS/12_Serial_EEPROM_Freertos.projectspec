@@ -1,0 +1,38 @@
+<projectSpec>
+  <project
+        name="12_Serial_EEPROM_Freertos"
+        device="TMS320F28P650DK9"
+        cgtVersion="22.6.3.LTS"
+        products="C2000WARE"
+        outputFormat="ELF"
+        launchWizard="False"
+        linkerCommandFile=""
+        >
+    <!--
+      11_SCI_to_USB_Freertos, 10_SD_Card_SPI_Freertos와 같은 FreeRTOS 커널/포트(FreeRTOS/, device/) 구성을 그대로 재사용합니다.
+      힙 미사용(정적 할당만) 구성입니다. 컴파일러 정의 EEPROM_WITH_RTOS는 eeprom_cmds.c의 명령 표에 uptime 명령을 넣습니다.
+      (XML 주석 안에는 연속된 하이픈을 쓸 수 없어 옵션 이름은 적지 않았습니다.)
+    -->
+    <configuration name="CPU1_RAM"
+        compilerBuildOptions="--opt_level=off -I${PROJECT_ROOT}/device -I${PROJECT_ROOT}/device/driverlib -I${PROJECT_ROOT}/FreeRTOS/include -I${PROJECT_ROOT}/FreeRTOS/port -I${PROJECT_ROOT}/utils -I${PROJECT_ROOT} -v28 -ml -mt --cla_support=cla2 --define=RAM --define=EEPROM_WITH_RTOS --float_support=fpu64 --tmu_support=tmu0 --define=DEBUG --define=CPU1 --gen_func_subsections=on --diag_warning=225 --diag_suppress=10063"
+        linkerBuildOptions="--entry_point code_start -i${PROJECT_ROOT}" />
+    <configuration name="CPU1_FLASH"
+        compilerBuildOptions="--opt_level=off -I${PROJECT_ROOT}/device -I${PROJECT_ROOT}/device/driverlib -I${PROJECT_ROOT}/FreeRTOS/include -I${PROJECT_ROOT}/FreeRTOS/port -I${PROJECT_ROOT}/utils -I${PROJECT_ROOT} --define=_FLASH --define=EEPROM_WITH_RTOS -v28 -ml -mt --cla_support=cla2 --float_support=fpu64 --tmu_support=tmu0 --define=DEBUG --define=CPU1 --gen_func_subsections=on --diag_warning=225 --diag_suppress=10063"
+        linkerBuildOptions="--entry_point code_start --define=_FLASH -i${PROJECT_ROOT}" />
+
+    <file action="copy" path="../driverlib.lib" targetDirectory="" applicableConfigurations="CPU1_RAM, CPU1_FLASH" />
+    <file action="copy" path="../28p65x_freertos_ram_lnk_cpu1.cmd" targetDirectory="" applicableConfigurations="CPU1_RAM" />
+    <file action="copy" path="../28p65x_freertos_flash_lnk_cpu1.cmd" targetDirectory="" applicableConfigurations="CPU1_FLASH" />
+    <file action="copy" path="../targetConfigs/TMS320F28P650DK9.ccxml" targetDirectory="targetConfigs" />
+    <file action="copy" path="../device" targetDirectory="" />
+    <file action="copy" path="../FreeRTOS" targetDirectory="" />
+    <file action="copy" path="../utils" targetDirectory="" />
+    <file action="copy" path="../FreeRTOSConfig.h" targetDirectory="" />
+    <file action="copy" path="../m95m04.h" targetDirectory="" />
+    <file action="copy" path="../m95m04.c" targetDirectory="" />
+    <file action="copy" path="../m95m04_hal.c" targetDirectory="" />
+    <file action="copy" path="../eeprom_cmds.h" targetDirectory="" />
+    <file action="copy" path="../eeprom_cmds.c" targetDirectory="" />
+    <file action="copy" path="../12_Serial_EEPROM_Freertos.c" targetDirectory="" />
+  </project>
+</projectSpec>
