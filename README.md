@@ -84,6 +84,7 @@ RAM 구성은 코드까지 RAM에 올라가므로 크고, 스택이 포함됩니
 
 ## 관련 링크
 - 상품 페이지: https://tms320f28x.co.kr/goods/goods_view.php?goodsNo=200903127
+- 게시판 글: https://tms320f28x.co.kr/board/view.php?bdId=tms320f28xevmv2&sno=114
 
 ## 프로세서 모듈
 
